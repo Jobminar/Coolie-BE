@@ -1,8 +1,6 @@
-// models/Category.js
-
 import mongoose from "mongoose";
 
-const serviceVariants = new mongoose.Schema({
+const serviceVariantSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String },
   isActive: { type: Boolean, default: true },
@@ -11,4 +9,4 @@ const serviceVariants = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-export default mongoose.model("serviceVariants", serviceVariants);
+export default mongoose.model("ServiceVariant", serviceVariantSchema);
