@@ -1,24 +1,15 @@
 import express from "express";
-import multer from "multer";
 import {
-  createSubcategory,
-  getSubcategories,
-  getSubcategoryById,
-} from "../_core/services/controllers/sub-category.controller.js";
-import {
-  createCategory,
-  getCategories,
-  getCategoryById,
-} from "../_core/services/controllers/category.controller.js";
+  createServiceVariant,
+  getServiceVariants,
+} from "../controllers/serviceVariant.controller.js";
 
 const router = express.Router();
 
-router.post("/categories", createCategory);
-router.get("/categories", getCategories);
-router.get("/categories/:id", getCategoryById);
+// POST /service-variants
+router.post("/service-variants", createServiceVariant);
 
-router.post("/subcategories", upload.single("image"), createSubcategory);
-router.get("/subcategories", getSubcategories);
-router.get("/subcategories/:id", getSubcategoryById);
+// GET /service-variants
+router.get("/service-variants", getServiceVariants);
 
 export default router;

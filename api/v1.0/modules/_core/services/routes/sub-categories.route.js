@@ -4,7 +4,7 @@ import {
   createSubcategory,
   getSubcategories,
   getSubcategoryById,
-} from "../_core/services/controllers/sub-category.controller.js";
+} from "../_core/services/controllers/sub-categories.controller.js";
 
 const router = express.Router();
 
