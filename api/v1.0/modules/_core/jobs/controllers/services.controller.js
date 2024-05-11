@@ -1,17 +1,13 @@
-import AWS from 'aws-sdk';
-import servicesSchema from '../models/services.model.js';
-import dotenv from 'dotenv';
+import servicesSchema from "../models/services.model.js";
+import dotenv from "dotenv";
+import { imageUpload } from "../../../../../../utils/aws.utils.js";
 
 dotenv.config();
-
-const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-});
 
 const serviceController = {
   createService: async (req, res) => {
     try {
+      // Extract necessary data from request body
       const { name, description, categoryId, subCategoryId, serviceVariants, locations, taxPercentage, providerCommission, isMostBooked, tag, isActive, isDeleted } = req.body;
 
       // Check if req.file exists and if it's an image
@@ -19,8 +15,8 @@ const serviceController = {
         return res.status(400).json({ message: 'Please upload an image file' });
       }
 
-      // Upload image to AWS S3
-      const imageKey = await uploadImageToS3(req.file);
+      // Upload image to AWS S3 and get the image URL
+      const imageKey = await imageUpload(req.file.buffer.toString('base64'));
 
       // Create a new service object
       const newService = new servicesSchema({
@@ -39,6 +35,7 @@ const serviceController = {
         isDeleted,
       });
 
+      // Save the new service to the database
       const service = await newService.save();
 
       // Return the created service
@@ -48,22 +45,15 @@ const serviceController = {
       res.status(400).json({ message: error.message });
     }
   },
-};
 
-// Function to upload image to AWS S3
-const uploadImageToS3 = async (file) => {
-  const base64Data = new Buffer.from(file.buffer, 'base64');
-  const type = file.originalname.split('.')[1];
-  const params = {
-    Bucket: process.env.AWS_BUCKET_NAME,
-    Key: `images/${Date.now()}.${type}`,
-    Body: base64Data,
-    ACL: 'public-read',
-    ContentEncoding: 'base64',
-    ContentType: `image/${type}`,
-  };
-  const { Location } = await s3.upload(params).promise();
-  return Location;
+  getServices: async (req, res) => {
+    try {
+      const services = await servicesSchema.find();
+      res.json(services);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
 };
 
 export default serviceController;
