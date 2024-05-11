@@ -4,12 +4,12 @@ import {
   createSubcategory,
   getSubcategories,
   getSubcategoryById,
-} from "../_core/services/controllers/sub-categories.controller.js";
+} from  "../controllers/sub-categories.controller.js";
 
 const router = express.Router();
 
-router.post("/subcategories", upload.single("image"), createSubcategory);
-router.get("/subcategories", getSubcategories);
-router.get("/subcategories/:id", getSubcategoryById);
+router.post("/", createSubcategory);
+router.get("/", getSubcategories);
+router.get("/details/:id", getSubcategoryById);
 
 export default router;

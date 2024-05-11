@@ -1,5 +1,7 @@
 import AWS from "aws-sdk";
-import Subcategory from "../models/sub-category.model.js";
+import Subcategory from "../models/sub-categories.model.js"
+import {imageUpload} from "../../../../../../utils/aws.utils.js"
+
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -12,22 +14,16 @@ const s3 = new AWS.S3({
 export const createSubcategory = async (req, res) => {
   try {
     const { name, description, image, charges, offers } = req.body;
+   
+    const imageKey= await imageUpload(image)
+    
+     console.log("image key",imageKey)
 
-    // Upload image to S3
-    const imageKey = `images/${image.originalname}`;
-    const params = {
-      Bucket: process.env.AWS_BUCKET_NAME,
-      Key: imageKey,
-      Body: image.buffer,
-      ACL: "public-read",
-    };
-    await s3.upload(params).promise();
-
-    // Create subcategory with S3 image URL
+    // Create subcategory with S3 image U
     const subcategory = new Subcategory({
       name,
       description,
-      image: `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${imageKey}`,
+      imageKey,
       charges,
       offers,
     });
@@ -60,3 +56,6 @@ export const getSubcategoryById = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+

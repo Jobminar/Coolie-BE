@@ -1,15 +1,12 @@
 import express from "express";
-import {
-  createServiceVariant,
-  getServiceVariants,
-} from "../controllers/serviceVariant.controller.js";
+import {  createServiceVariant,  getServiceVariants,} from "../controllers/service-variants.controller.js";
 
 const router = express.Router();
 
 // POST /service-variants
-router.post("/service-variants", createServiceVariant);
+router.post("/", createServiceVariant);
 
 // GET /service-variants
-router.get("/service-variants", getServiceVariants);
+router.get("/", getServiceVariants);
 
 export default router;
