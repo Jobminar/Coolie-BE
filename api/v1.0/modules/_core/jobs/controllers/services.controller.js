@@ -1,28 +1,40 @@
-import servicesSchema from "../models/services.model.js";
-import dotenv from "dotenv";
+import Service from "../models/services.model.js";
+import AWS from "aws-sdk";
 import { imageUpload } from "../../../../../../utils/aws.utils.js";
+import dotenv from "dotenv";
 
 dotenv.config();
+
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
 
 const serviceController = {
   createService: async (req, res) => {
     try {
       // Extract necessary data from request body
-      const { name, description, categoryId, subCategoryId, serviceVariants, locations, taxPercentage, providerCommission, isMostBooked, tag, isActive, isDeleted } = req.body;
-
-      // Check if req.file exists and if it's an image
-      if (!req.file || !req.file.mimetype.startsWith('image')) {
-        return res.status(400).json({ message: 'Please upload an image file' });
-      }
-
-      // Upload image to AWS S3 and get the image URL
-      const imageKey = await imageUpload(req.file.buffer.toString('base64'));
-
-      // Create a new service object
-      const newService = new servicesSchema({
+      const {
         name,
         description,
-        imageKey,
+        categoryId,
+        subCategoryId,
+        serviceVariants,
+        locations,
+        taxPercentage,
+        providerCommission,
+        isMostBooked,
+        tag,
+        isActive,
+        isDeleted,
+        image, // Assuming image is a base64-encoded string in the request body
+      } = req.body;
+
+      // Create a new service object
+      const newService = new Service({
+        name,
+        description,
+        image,
         categoryId,
         subCategoryId,
         serviceVariants,
@@ -41,19 +53,19 @@ const serviceController = {
       // Return the created service
       res.status(201).json(service);
     } catch (error) {
-      console.error('Error creating service:', error);
+      console.error("Error creating service:", error);
       res.status(400).json({ message: error.message });
     }
   },
 
   getServices: async (req, res) => {
     try {
-      const services = await servicesSchema.find();
+      const services = await Service.find();
       res.json(services);
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
-  }
+  },
 };
 
 export default serviceController;
