@@ -25,7 +25,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use("/v1.0", router);
 
-
 const PORT = process.env.PORT || 3000;
 // app.listen(PORT, () => { console.log(`Server is running on port ${PORT}`);});
-app.listen(PORT,()=>console.log(`server running ${PORT}`))
+app.listen(PORT, () => console.log(`server running ${PORT}`));
