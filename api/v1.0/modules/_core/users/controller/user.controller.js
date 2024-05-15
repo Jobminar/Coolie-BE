@@ -7,7 +7,7 @@ const userController = {
 
     try {
       // Check if password and confirmPassword match
-      if (password !== confirmPassword) {
+      if (!password || !confirmPassword || password !== confirmPassword) {
         return res.status(400).json({ message: "Passwords do not match" });
       }
 
@@ -26,11 +26,13 @@ const userController = {
       res.status(500).json({ message: error.message });
     }
   },
+ 
+
   login: async (req, res) => {
     const { email, password } = req.body;
 
     try {
-      // Check if user exists with the provided email
+      // Find user by email
       const user = await User.findOne({ email });
       if (!user) {
         return res.status(404).json({ message: "User not found" });
@@ -50,6 +52,8 @@ const userController = {
       res.status(500).json({ message: error.message });
     }
   }
+
+
 };
 
 export default userController;

@@ -23,7 +23,7 @@ const servicesSchema = new mongoose.Schema({
       lat: { type: Number },
       long: { type: Number },
       address: { type: String },
-      availableRadius: { type: Number }, //in kilometers
+      availableRadius: { type: Number }, 
     },
   ],
   taxPercentage: { type: Number, default: 0 },
