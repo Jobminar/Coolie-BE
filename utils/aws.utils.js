@@ -4,12 +4,7 @@ const imageUpload = async (base64) => {
   // You can either "yarn add aws-sdk" or "npm i aws-sdk"
 
   // Configure AWS with your access and secret key.
-  const {
-    AWS_ACCESS_KEY_ID,
-    AWS_SECRET_ACCESS_KEY,
-    AWS_REGION,
-    AWS_BUCKET_NAME,
-  } = process.env;
+  const { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, AWS_BUCKET_NAME} = process.env;
 
   // Configure AWS to use promise
   // AWS.config.setPromisesDependency(require('bluebird'));
