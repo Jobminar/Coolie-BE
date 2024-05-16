@@ -1,8 +1,8 @@
 import User from "../models/user.model.js";
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
-class UserController {
-  async signup(req, res) {
+const userController = {
+  signup: async (req, res) => {
     const { email, password, confirmPassword } = req.body;
 
     try {
@@ -14,9 +14,7 @@ class UserController {
       // Check if user already exists with the provided email
       const existingUser = await User.findOne({ email });
       if (existingUser) {
-        return res
-          .status(400)
-          .json({ message: "User with this email already exists" });
+        return res.status(400).json({ message: "User with this email already exists" });
       }
 
       // Create a new user
@@ -27,9 +25,10 @@ class UserController {
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
-  }
+  },
+ 
 
-  async login(req, res) {
+  login: async (req, res) => {
     const { email, password } = req.body;
 
     try {
@@ -46,15 +45,15 @@ class UserController {
       }
 
       // If the email and password are correct, generate a JWT token
-      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
-      });
+      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
       res.status(200).json({ token });
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
   }
-}
 
-export default new UserController();
+
+};
+
+export default userController;
