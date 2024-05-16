@@ -1,5 +1,5 @@
 import express from "express";
-import catagoriesRoute from "../_core/jobs/routes/categories.route.js"
+import catagoriesRoute from "../_core/jobs/routes/categories.route.js";
 import serviceVariantsRoute from "../_core/jobs/routes/service-variants.route.js";
 import servicesRoute from "../_core/jobs/routes/services.route.js";
 import subCategoriesRoute from  "../_core/jobs/routes/sub-categories.route.js";

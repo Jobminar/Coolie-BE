@@ -1,6 +1,6 @@
 // models/services.js
 import mongoose from "mongoose";
-
+//this is merged by sameer
 const servicesSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String },
