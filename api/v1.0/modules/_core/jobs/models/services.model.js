@@ -34,6 +34,7 @@ const servicesSchema = new mongoose.Schema({
   isDeleted: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
+  cos: { type: Boolean, default: true },
 });
 
 export default mongoose.model("services", servicesSchema);
