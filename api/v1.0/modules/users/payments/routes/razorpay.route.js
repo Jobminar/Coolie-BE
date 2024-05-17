@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { createPayment } from "../controllers/razorpay.controllers.js";
+import { createPayment } from "../../controllers/razorpay.controllers.js";
 
 const router = express.Router();
 

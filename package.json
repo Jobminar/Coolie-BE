@@ -1,5 +1,9 @@
 {
+  "name": "coolie",
   "type": "module",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
   "dependencies": {
     "aws-sdk": "^2.1616.0",
     "axios": "^1.6.8",

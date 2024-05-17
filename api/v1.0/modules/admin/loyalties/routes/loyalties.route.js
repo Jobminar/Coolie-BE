@@ -1,5 +1,5 @@
 import express from 'express'
-import LoyaltyController from '../controller/loyalti.card.js'
+import LoyaltyController from '../controller/loyalties.controller.js'
 
 const router=express.Router()
 

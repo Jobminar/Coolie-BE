@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
-import router from "./api/v1.0/modules/routes/index.js";
+import router from "./api/v1.0/routes/index.js";
 
 // Load environment variables
 dotenv.config();
