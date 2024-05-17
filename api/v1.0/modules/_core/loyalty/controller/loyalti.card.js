@@ -1,4 +1,4 @@
-import LoyaltyModel from "../../loyalty/model/loyalti.model.js"
+import LoyaltyModel from "../model/loyalti.model.js"
 import { imageUpload } from "../../../../../../utils/aws.utils.js";
 
 const LoyaltyController = {

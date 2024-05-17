@@ -17,7 +17,7 @@ app.use("/core/service-variants", serviceVariantsRoute);
 app.use("/core/services", servicesRoute);
 
 app.use("/core/sub-categories", subCategoriesRoute);
-
+ 
 app.use("/core/loyalti",loyaltiRouter)
 
 app.use("/core/wallet",walletRouter)

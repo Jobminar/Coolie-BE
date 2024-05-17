@@ -1,6 +1,5 @@
-// models/services.js
 import mongoose from "mongoose";
-//this is merged by sameer
+
 const servicesSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String },
@@ -23,7 +22,7 @@ const servicesSchema = new mongoose.Schema({
       lat: { type: Number },
       long: { type: Number },
       address: { type: String },
-      availableRadius: { type: Number }, 
+      availableRadius: { type: Number },
     },
   ],
   taxPercentage: { type: Number, default: 0 },
