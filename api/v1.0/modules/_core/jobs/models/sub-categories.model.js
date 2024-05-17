@@ -1,4 +1,3 @@
-// models/Subcategory.js
 import mongoose from "mongoose";
 
 const subcategorySchema = new mongoose.Schema({
@@ -21,4 +20,4 @@ const subcategorySchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-export default mongoose.model("subCategories", subcategorySchema);
+export default mongoose.model("SubCategory", subcategorySchema);

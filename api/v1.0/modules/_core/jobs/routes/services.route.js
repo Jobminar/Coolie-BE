@@ -6,7 +6,6 @@ const router = express.Router();
 
 
 router.post("/", serviceController.createService);
-
-// router.get("/", serviceController.getServices);
+router.get("/", serviceController.getServices);
 
 export default router;
