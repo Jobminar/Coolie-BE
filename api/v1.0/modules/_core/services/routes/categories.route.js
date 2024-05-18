@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * @swagger
  * tags:
@@ -5,6 +6,8 @@
  *   description: Operations related to categories
  */
 
+=======
+>>>>>>> 30b2fb6c6da5b6b747576cd2213a9aadd5dea77b
 import express from "express";
 import {
   createCategory,
