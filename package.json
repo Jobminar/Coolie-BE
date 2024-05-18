@@ -14,7 +14,15 @@
     "mongoose": "^8.3.3",
     "multer": "^1.4.5-lts.1",
     "razorpay": "^2.9.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
     "validator": "^13.11.0",
     "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "swagger-autogen": "^2.23.7"
+  },
+  "scripts": {
+    "swagger": "node ./utils/swagger.js"
   }
 }
