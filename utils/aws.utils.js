@@ -68,31 +68,31 @@
 // export { imageUpload };
 
 
-import AWS from "aws-sdk";
-import dotenv from "dotenv";
-import { v4 as uuidv4 } from 'uuid';
-import path from 'path';
+// import AWS from "aws-sdk";
+// import dotenv from "dotenv";
+// import { v4 as uuidv4 } from 'uuid';
+// import path from 'path';
 
-dotenv.config();
+// dotenv.config();
 
-const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION,
-});
+// const s3 = new AWS.S3({
+//   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+//   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+//   region: process.env.AWS_REGION,
+// });
 
-export const imageUpload = async (file) => {
-  const fileExtension = path.extname(file.originalname);
-  const imageKey = `sub-categories/${uuidv4()}${fileExtension}`;
+// export const imageUpload = async (file) => {
+//   const fileExtension = path.extname(file.originalname);
+//   const imageKey = `sub-categories/${uuidv4()}${fileExtension}`;
 
-  const s3Params = {
-    Bucket: process.env.AWS_BUCKET_NAME,
-    Key: imageKey,
-    Body: file.buffer,
-    ACL: 'public-read',
-    ContentType: file.mimetype,
-  };
+//   const s3Params = {
+//     Bucket: process.env.AWS_BUCKET_NAME,
+//     Key: imageKey,
+//     Body: file.buffer,
+//     ACL: 'public-read',
+//     ContentType: file.mimetype,
+//   };
 
-  const uploadResult = await s3.upload(s3Params).promise();
-  return uploadResult.Key;
-};
+//   const uploadResult = await s3.upload(s3Params).promise();
+//   return uploadResult.Key;
+// };

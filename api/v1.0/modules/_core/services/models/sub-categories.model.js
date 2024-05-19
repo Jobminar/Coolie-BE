@@ -20,4 +20,4 @@ const subcategorySchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-export default mongoose.model("SubCategory", subcategorySchema);
+export default mongoose.model("Subcategory", subcategorySchema);

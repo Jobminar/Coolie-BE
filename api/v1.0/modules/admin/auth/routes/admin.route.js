@@ -4,9 +4,10 @@ import adminController from '../controllers/admin.controller.js'
 const router=express.Router()
 
 router.post("/signup",adminController.signup)
-router.post("/admin-login",adminController.login)
-router.get("/get/:id",adminController.getAdminById)
+router.post("/login",adminController.login)
+router.post('/send-otp', adminController.sendForgotPasswordOtp);
+router.post('/verify-otp', adminController.verifyOtp);
+router.post('/change-password', adminController.changePassword);
 
-// router.post("/admin-login", adminController.adminLogin);
 
 export default router  

@@ -17,6 +17,23 @@ const s3 = new AWS.S3({
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
+// Function to upload image to S3
+const imageUpload = async (file) => {
+  const fileExtension = path.extname(file.originalname);
+  const imageKey = `services/${uuidv4()}${fileExtension}`;
+
+  const s3Params = {
+    Bucket: process.env.AWS_BUCKET_NAME,
+    Key: imageKey,
+    Body: file.buffer,
+    ACL: 'public-read',
+    ContentType: file.mimetype,
+  };
+
+  const uploadResult = await s3.upload(s3Params).promise();
+  return uploadResult.Key;
+};
+
 const constructImageUrl = (key) => `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
 
 const serviceController = {
@@ -45,18 +62,7 @@ const serviceController = {
 
         let imageKey = null;
         if (req.file) {
-          const fileContent = req.file.buffer;
-          const fileExtension = path.extname(req.file.originalname);
-          imageKey = `images/${uuidv4()}${fileExtension}`;
-          const s3Params = {
-            Bucket: process.env.AWS_BUCKET_NAME,
-            Key: imageKey,
-            Body: fileContent,
-            ACL: 'public-read',
-            ContentType: req.file.mimetype,
-          };
-
-          await s3.upload(s3Params).promise();
+          imageKey = await imageUpload(req.file);
         }
 
         // Create a new service object
@@ -100,6 +106,7 @@ const serviceController = {
 
       res.json(servicesWithImageUrl);
     } catch (error) {
+      console.error("Error retrieving services:", error);
       res.status(500).json({ message: error.message });
     }
   },
