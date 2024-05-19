@@ -51,5 +51,6 @@ router.post("/", serviceController.createService);
  *           description: Internal server error
  */
 router.get("/", serviceController.getServices);
+router.delete("/delete/:id",serviceController.deleteService)
 
 export default router;

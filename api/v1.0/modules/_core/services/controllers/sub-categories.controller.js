@@ -51,7 +51,6 @@ const subcategoriesController = {
           return res.status(400).json({ message: "Please provide all required fields" });
         }
 
-        // Ensure serviceVariants is parsed as an array of objects
         const serviceVariantsArray = JSON.parse(serviceVariants);
 
         // Upload the image to AWS S3

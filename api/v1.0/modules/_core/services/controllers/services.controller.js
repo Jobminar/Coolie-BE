@@ -110,6 +110,36 @@ const serviceController = {
       res.status(500).json({ message: error.message });
     }
   },
+   deleteService : async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      // Find the service by ID
+      const service = await Service.findById(id);
+  
+      if (!service) {
+        return res.status(404).json({ message: "Service not found" });
+      }
+  
+      // Delete the image from S3 if it exists
+      if (service.imageKey) {
+        const s3Params = {
+          Bucket: process.env.AWS_BUCKET_NAME,
+          Key: service.imageKey,
+        };
+  
+        await s3.deleteObject(s3Params).promise();
+      }
+  
+      // Delete the service from the database
+      await Service.findByIdAndDelete(id);
+  
+      res.status(200).json({ message: "Service deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting service:", error);
+      res.status(500).json({ message: error.message });
+    }
+  }
 };
 
 export default serviceController;
