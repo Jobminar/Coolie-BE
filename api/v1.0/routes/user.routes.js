@@ -1,7 +1,7 @@
 import express from "express";
 
-import walletRouter from "../modules/_core/walltet/route/wallet.route.js";
-import authRouter from "../modules/users/routes/user.route.js";
+import walletRouter from "../modules/users/wallet/route/wallet.route.js";
+import authRouter from "../modules/users/auth/routes/user.route.js";
 
 const app = express();
 
